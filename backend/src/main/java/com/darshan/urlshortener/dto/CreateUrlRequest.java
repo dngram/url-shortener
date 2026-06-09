@@ -4,6 +4,8 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+
 @Getter
 @Setter
 public class CreateUrlRequest {
@@ -12,4 +14,6 @@ public class CreateUrlRequest {
     private String originalUrl;
 
     private String customAlias;
+
+    private LocalDateTime expiryDate;
 }

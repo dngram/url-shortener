@@ -25,6 +25,7 @@ export class UrlCreateComponent {
   originalUrl = '';
   generatedUrl = '';
   customAlias = '';
+  expiryDate = '';
 
   @Output()
   urlCreated = new EventEmitter<void>();
@@ -45,7 +46,10 @@ export class UrlCreateComponent {
           this.originalUrl,
 
         customAlias:
-          this.customAlias
+          this.customAlias,
+
+        expiryDate:
+          this.expiryDate || undefined
       };
 
     this.urlService

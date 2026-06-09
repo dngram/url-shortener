@@ -82,6 +82,8 @@ public class ShortUrlService {
                         .clickCount(0)
                         .createdAt(
                                 LocalDateTime.now())
+                        .expiryDate(
+                                request.getExpiryDate())
                         .build();
 
         repository.save(shortUrl);
@@ -131,11 +133,26 @@ public class ShortUrlService {
     public ShortUrl getByShortCode(
             String shortCode) {
 
-        return repository.findByShortCode(
-                        shortCode)
-                .orElseThrow(() ->
-                        new RuntimeException(
-                                "Short URL not found"));
+        ShortUrl url =
+                repository.findByShortCode(
+                                shortCode)
+                        .orElseThrow(() ->
+                                new RuntimeException(
+                                        "Short URL not found"));
+
+        if (
+                url.getExpiryDate() != null
+                        &&
+                        url.getExpiryDate()
+                                .isBefore(
+                                        LocalDateTime.now())
+        ) {
+
+            throw new RuntimeException(
+                    "URL has expired");
+        }
+
+        return url;
     }
 
     public void incrementClickCount(
@@ -162,6 +179,8 @@ public class ShortUrlService {
                                         url.getClickCount())
                                 .createdAt(
                                         url.getCreatedAt())
+                                .expiryDate(
+                                        url.getExpiryDate())
                                 .build())
                 .toList();
     }

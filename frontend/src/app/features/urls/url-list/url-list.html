@@ -11,6 +11,7 @@
             <th>Clicks</th>
             <th>Created</th>
             <th>Copy</th>
+            <th>Expiry</th>
 
         </tr>
 
@@ -49,14 +50,34 @@
 
             <td>
 
-            <button
-                (click)="copyUrl(
-                url.shortCode
-                )">
+                <button
+                    (click)="copyUrl(
+                    url.shortCode
+                    )">
 
-                Copy
+                    Copy
 
-            </button>
+                </button>
+
+            </td>
+
+            <td>
+
+                <span
+                    *ngIf="url.expiryDate">
+
+                    {{ url.expiryDate
+                        | date :
+                        'dd MMM yyyy HH:mm' }}
+
+                </span>
+
+                <span
+                    *ngIf="!url.expiryDate">
+
+                    Never
+
+                </span>
 
             </td>
 

@@ -37,4 +37,7 @@ public class ShortUrl {
 
     @Column(nullable = false)
     private LocalDateTime createdAt;
+
+    @Column
+    private LocalDateTime expiryDate;
 }

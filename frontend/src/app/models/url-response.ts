@@ -9,4 +9,6 @@ export interface UrlResponse {
   clickCount: number;
 
   createdAt: string;
+
+  expiryDate: string;
 }

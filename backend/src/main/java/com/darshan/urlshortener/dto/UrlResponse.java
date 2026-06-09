@@ -18,4 +18,6 @@ public class UrlResponse {
     private Integer clickCount;
 
     private LocalDateTime createdAt;
+
+    private LocalDateTime expiryDate;
 }

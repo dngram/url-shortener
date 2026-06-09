@@ -4,16 +4,30 @@
         URL Shortener
     </h1>
 
-    <input
-        type="text"
-        [(ngModel)]="originalUrl"
-        placeholder="Enter URL">
+        <input
+            type="text"
+            [(ngModel)]="originalUrl"
+            placeholder="Enter URL">
 
-    <button
-        (click)="generateUrl()">
+        <input
+            type="text"
+            [(ngModel)]="customAlias"
+            placeholder="Custom Alias (Optional)">
 
-        Generate
-    </button>
+        <label>
+            Expiry Date (Optional)
+        </label>
+
+        <input
+            type="datetime-local"
+            [(ngModel)]="expiryDate">
+
+        <button
+            (click)="generateUrl()">
+
+            Generate
+
+        </button>
 
     <div
         *ngIf="generatedUrl">
@@ -32,12 +46,6 @@
     </div>
 
 </div>
-
-<input
-  type="text"
-  [(ngModel)]="customAlias"
-  placeholder=
-  "Custom Alias (Optional)">
 
 <app-url-list
   #urlList>
