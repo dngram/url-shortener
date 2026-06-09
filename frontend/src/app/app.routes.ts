@@ -1,3 +1,15 @@
 import { Routes } from '@angular/router';
 
-export const routes: Routes = [];
+import {
+  UrlCreateComponent
+}
+from './features/urls/url-create/url-create';
+
+export const routes: Routes = [
+
+  {
+    path: '',
+    component: UrlCreateComponent
+  }
+
+];

@@ -1,0 +1,44 @@
+<div class="container">
+
+    <h1>
+        URL Shortener
+    </h1>
+
+    <input
+        type="text"
+        [(ngModel)]="originalUrl"
+        placeholder="Enter URL">
+
+    <button
+        (click)="generateUrl()">
+
+        Generate
+    </button>
+
+    <div
+        *ngIf="generatedUrl">
+
+        <h3>
+            Short URL
+        </h3>
+
+        <a
+            [href]="generatedUrl"
+            target="_blank">
+
+            {{ generatedUrl }}
+        </a>
+
+    </div>
+
+</div>
+
+<input
+  type="text"
+  [(ngModel)]="customAlias"
+  placeholder=
+  "Custom Alias (Optional)">
+
+<app-url-list
+  #urlList>
+</app-url-list>

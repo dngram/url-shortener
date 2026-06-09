@@ -1,0 +1,67 @@
+<h2>Stored URLs</h2>
+
+<table>
+
+    <thead>
+
+        <tr>
+
+            <th>Short Code</th>
+            <th>Original URL</th>
+            <th>Clicks</th>
+            <th>Created</th>
+            <th>Copy</th>
+
+        </tr>
+
+    </thead>
+
+    <tbody>
+
+        <tr *ngFor="let url of urls">
+
+            <td>
+
+            <a
+                [href]="
+                'http://localhost:8080/'
+                + url.shortCode
+                "
+                target="_blank">
+
+                {{ url.shortCode }}
+
+            </a>
+
+            </td>
+
+            <td>
+                {{ url.originalUrl }}
+            </td>
+
+            <td>
+                {{ url.clickCount }}
+            </td>
+
+            <td>
+                {{ url.createdAt | date : 'dd MMM yyyy'}}
+            </td>
+
+            <td>
+
+            <button
+                (click)="copyUrl(
+                url.shortCode
+                )">
+
+                Copy
+
+            </button>
+
+            </td>
+
+        </tr>
+
+    </tbody>
+
+</table>
