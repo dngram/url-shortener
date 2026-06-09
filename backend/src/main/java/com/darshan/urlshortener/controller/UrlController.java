@@ -1,5 +1,6 @@
 package com.darshan.urlshortener.controller;
 
+import com.darshan.urlshortener.dto.AnalyticsResponse;
 import com.darshan.urlshortener.dto.CreateUrlRequest;
 import com.darshan.urlshortener.dto.CreateUrlResponse;
 import com.darshan.urlshortener.dto.UrlResponse;
@@ -61,5 +62,14 @@ public class UrlController {
                         HttpHeaders.LOCATION,
                         shortUrl.getOriginalUrl())
                 .build();
+    }
+
+    @GetMapping(
+            "/api/urls/analytics")
+    public AnalyticsResponse
+    getAnalytics() {
+
+        return service
+                .getAnalytics();
     }
 }

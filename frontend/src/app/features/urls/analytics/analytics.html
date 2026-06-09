@@ -1,0 +1,26 @@
+<div
+    *ngIf="analytics"
+    class="analytics">
+
+    <div>
+        Total URLs:
+        {{ analytics.totalUrls }}
+    </div>
+
+    <div>
+        Total Clicks:
+        {{ analytics.totalClicks }}
+    </div>
+
+    <div>
+        Expired URLs:
+        {{ analytics.expiredUrls }}
+    </div>
+
+    <div>
+        Most Clicked:
+        {{ analytics.mostClickedShortCode }}
+        ({{ analytics.highestClickCount }})
+    </div>
+
+</div>

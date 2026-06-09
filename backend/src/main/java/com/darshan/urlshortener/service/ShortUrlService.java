@@ -1,5 +1,6 @@
 package com.darshan.urlshortener.service;
 
+import com.darshan.urlshortener.dto.AnalyticsResponse;
 import com.darshan.urlshortener.dto.CreateUrlRequest;
 import com.darshan.urlshortener.dto.CreateUrlResponse;
 import com.darshan.urlshortener.dto.UrlResponse;
@@ -183,5 +184,40 @@ public class ShortUrlService {
                                         url.getExpiryDate())
                                 .build())
                 .toList();
+    }
+
+    public AnalyticsResponse
+    getAnalytics() {
+
+        Long totalUrls =
+                repository.count();
+
+        Long totalClicks =
+                repository.getTotalClicks();
+
+        Long expiredUrls =
+                repository
+                        .countByExpiryDateBefore(
+                                LocalDateTime.now());
+
+        ShortUrl mostClicked =
+                repository
+                        .findTopByOrderByClickCountDesc()
+                        .orElse(null);
+
+        return AnalyticsResponse
+                .builder()
+                .totalUrls(totalUrls)
+                .totalClicks(totalClicks)
+                .expiredUrls(expiredUrls)
+                .mostClickedShortCode(
+                        mostClicked != null
+                                ? mostClicked.getShortCode()
+                                : "N/A")
+                .highestClickCount(
+                        mostClicked != null
+                                ? mostClicked.getClickCount()
+                                : 0)
+                .build();
     }
 }

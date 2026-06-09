@@ -9,13 +9,15 @@ import { CreateUrlRequest } from '../../../models/create-url-request';
 import { CreateUrlResponse } from '../../../models/create-url-response';
 import { Output, EventEmitter } from '@angular/core';
 import { ViewChild } from '@angular/core';
+import { AnalyticsComponent } from '../analytics/analytics';
 
 @Component({
   selector: 'app-url-create',
   imports: [
     CommonModule,
     FormsModule,
-    UrlListComponent
+    UrlListComponent,
+    AnalyticsComponent
   ],
   templateUrl: './url-create.html',
   styleUrl: './url-create.scss'

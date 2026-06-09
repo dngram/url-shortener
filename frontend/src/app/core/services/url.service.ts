@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { CreateUrlRequest } from '../../models/create-url-request';
 import { CreateUrlResponse } from '../../models/create-url-response';
 import { UrlResponse } from '../../models/url-response';
+import { AnalyticsResponse } from '../../models/analytics-response';
 
 @Injectable({
   providedIn: 'root'
@@ -36,4 +37,15 @@ export class UrlService {
       this.apiUrl
     );
   }
+
+  getAnalytics()
+: Observable<AnalyticsResponse> {
+
+  return this.http.get<
+    AnalyticsResponse
+  >(
+    this.apiUrl +
+    '/analytics'
+  );
+}
 }
