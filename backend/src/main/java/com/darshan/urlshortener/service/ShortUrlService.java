@@ -7,6 +7,7 @@ import com.darshan.urlshortener.dto.UrlResponse;
 import com.darshan.urlshortener.entity.ShortUrl;
 import com.darshan.urlshortener.repository.ShortUrlRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.data.redis.core.RedisTemplate;
 
 import java.net.URL;
 import java.security.SecureRandom;
@@ -17,11 +18,13 @@ import java.util.List;
 public class ShortUrlService {
 
     private final ShortUrlRepository repository;
+    private final RedisTemplate<String, ShortUrl> redisTemplate;
 
     public ShortUrlService(
-            ShortUrlRepository repository) {
+            ShortUrlRepository repository, RedisTemplate<String, ShortUrl> redisTemplate) {
 
         this.repository = repository;
+        this.redisTemplate = redisTemplate;
     }
 
     public CreateUrlResponse createShortUrl(
@@ -134,6 +137,37 @@ public class ShortUrlService {
     public ShortUrl getByShortCode(
             String shortCode) {
 
+        ShortUrl cachedUrl =
+                redisTemplate
+                        .opsForValue()
+                        .get(shortCode);
+
+        if (cachedUrl != null) {
+
+            System.out.println(
+                    "Redis Cache HIT");
+
+            if (
+                    cachedUrl.getExpiryDate() != null
+                            &&
+                            cachedUrl.getExpiryDate()
+                                    .isBefore(
+                                            LocalDateTime.now())
+            ) {
+
+                redisTemplate.delete(
+                        shortCode);
+
+                throw new RuntimeException(
+                        "URL has expired");
+            }
+
+            return cachedUrl;
+        }
+
+        System.out.println(
+                "Redis Cache MISS");
+
         ShortUrl url =
                 repository.findByShortCode(
                                 shortCode)
@@ -153,9 +187,14 @@ public class ShortUrlService {
                     "URL has expired");
         }
 
+        redisTemplate
+                .opsForValue()
+                .set(
+                        shortCode,
+                        url);
+
         return url;
     }
-
     public void incrementClickCount(
             ShortUrl shortUrl) {
 
@@ -163,6 +202,11 @@ public class ShortUrlService {
                 shortUrl.getClickCount() + 1);
 
         repository.save(shortUrl);
+        redisTemplate
+                .opsForValue()
+                .set(
+                        shortUrl.getShortCode(),
+                        shortUrl);
     }
 
     public List<UrlResponse> getAllUrls() {

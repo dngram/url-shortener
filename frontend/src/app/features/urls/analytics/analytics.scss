@@ -1,10 +1,61 @@
 .analytics {
 
+    max-width: 1200px;
+
+    margin: 40px auto;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fit, minmax(220px, 1fr));
+
+    gap: 20px;
+}
+
+.analytics-card {
+
+    background: white;
+
+    border-radius: 16px;
+
+    padding: 24px;
+
+    box-shadow:
+        0 4px 12px rgba(0, 0, 0, 0.08);
+
     display: flex;
 
-    gap: 30px;
+    flex-direction: column;
 
-    margin-bottom: 20px;
+    gap: 10px;
 
-    font-weight: bold;
+    transition: transform 0.2s ease;
+}
+
+.analytics-card:hover {
+
+    transform: translateY(-3px);
+}
+
+.analytics-label {
+
+    color: #64748b;
+
+    font-size: 14px;
+}
+
+.analytics-value {
+
+    font-size: 30px;
+
+    font-weight: 700;
+
+    color: #2563eb;
+}
+
+.analytics-subtext {
+
+    color: #16a34a;
+
+    font-size: 14px;
 }

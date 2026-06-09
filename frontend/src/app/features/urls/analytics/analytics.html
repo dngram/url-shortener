@@ -2,25 +2,56 @@
     *ngIf="analytics"
     class="analytics">
 
-    <div>
-        Total URLs:
-        {{ analytics.totalUrls }}
+    <div class="analytics-card">
+
+        <span class="analytics-label">
+            Total URLs
+        </span>
+
+        <span class="analytics-value">
+            {{ analytics.totalUrls }}
+        </span>
+
     </div>
 
-    <div>
-        Total Clicks:
-        {{ analytics.totalClicks }}
+    <div class="analytics-card">
+
+        <span class="analytics-label">
+            Total Clicks
+        </span>
+
+        <span class="analytics-value">
+            {{ analytics.totalClicks }}
+        </span>
+
     </div>
 
-    <div>
-        Expired URLs:
-        {{ analytics.expiredUrls }}
+    <div class="analytics-card">
+
+        <span class="analytics-label">
+            Expired URLs
+        </span>
+
+        <span class="analytics-value">
+            {{ analytics.expiredUrls }}
+        </span>
+
     </div>
 
-    <div>
-        Most Clicked:
-        {{ analytics.mostClickedShortCode }}
-        ({{ analytics.highestClickCount }})
+    <div class="analytics-card">
+
+        <span class="analytics-label">
+            Most Clicked
+        </span>
+
+        <span class="analytics-value">
+            {{ analytics.mostClickedShortCode }}
+        </span>
+
+        <span class="analytics-subtext">
+            {{ analytics.highestClickCount }} clicks
+        </span>
+
     </div>
 
 </div>

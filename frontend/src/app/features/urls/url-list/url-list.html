@@ -1,88 +1,89 @@
-<h2>Stored URLs</h2>
+<div class="table-container">
 
-<table>
+    <h2>
+        Stored URLs
+    </h2>
 
-    <thead>
+    <table>
 
-        <tr>
+        <thead>
 
-            <th>Short Code</th>
-            <th>Original URL</th>
-            <th>Clicks</th>
-            <th>Created</th>
-            <th>Copy</th>
-            <th>Expiry</th>
+            <tr>
 
-        </tr>
+                <th>Short Code</th>
+                <th>Original URL</th>
+                <th>Clicks</th>
+                <th>Created</th>
+                <th>Copy</th>
+                <th>Expiry</th>
 
-    </thead>
+            </tr>
 
-    <tbody>
+        </thead>
 
-        <tr *ngFor="let url of urls">
+        <tbody>
 
-            <td>
+            <tr *ngFor="let url of urls">
 
-            <a
-                [href]="
-                'http://localhost:8080/'
-                + url.shortCode
-                "
-                target="_blank">
+                <td>
 
-                {{ url.shortCode }}
+                    <a
+                        [href]="'http://localhost:8080/' + url.shortCode"
+                        target="_blank">
 
-            </a>
+                        {{ url.shortCode }}
 
-            </td>
+                    </a>
 
-            <td>
-                {{ url.originalUrl }}
-            </td>
+                </td>
 
-            <td>
-                {{ url.clickCount }}
-            </td>
+                <td>
+                    {{ url.originalUrl }}
+                </td>
 
-            <td>
-                {{ url.createdAt | date : 'dd MMM yyyy'}}
-            </td>
+                <td>
+                    {{ url.clickCount }}
+                </td>
 
-            <td>
+                <td>
+                    {{ url.createdAt | date : 'dd MMM yyyy' }}
+                </td>
 
-                <button
-                    (click)="copyUrl(
-                    url.shortCode
-                    )">
+                <td>
 
-                    Copy
+                    <button
+                        (click)="copyUrl(url.shortCode)">
 
-                </button>
+                        Copy
 
-            </td>
+                    </button>
 
-            <td>
+                </td>
 
-                <span
-                    *ngIf="url.expiryDate">
+                <td>
 
-                    {{ url.expiryDate
+                    <span
+                        *ngIf="url.expiryDate">
+
+                        {{ url.expiryDate
                         | date :
                         'dd MMM yyyy HH:mm' }}
 
-                </span>
+                    </span>
 
-                <span
-                    *ngIf="!url.expiryDate">
+                    <span
+                        *ngIf="!url.expiryDate">
 
-                    Never
+                        Never
 
-                </span>
+                    </span>
 
-            </td>
+                </td>
 
-        </tr>
+            </tr>
 
-    </tbody>
+        </tbody>
 
-</table>
+    </table>
+
+</div>

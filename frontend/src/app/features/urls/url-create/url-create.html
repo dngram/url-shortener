@@ -6,36 +6,37 @@
         URL Shortener
     </h1>
 
-        <input
-            type="text"
-            [(ngModel)]="originalUrl"
-            placeholder="Enter URL">
+    <input
+        type="text"
+        [(ngModel)]="originalUrl"
+        placeholder="Enter URL">
 
-        <input
-            type="text"
-            [(ngModel)]="customAlias"
-            placeholder="Custom Alias (Optional)">
+    <input
+        type="text"
+        [(ngModel)]="customAlias"
+        placeholder="Custom Alias (Optional)">
 
-        <label>
-            Expiry Date (Optional)
-        </label>
+    <label>
+        Expiry Date (Optional)
+    </label>
 
-        <input
-            type="datetime-local"
-            [(ngModel)]="expiryDate">
+    <input
+        type="datetime-local"
+        [(ngModel)]="expiryDate">
 
-        <button
-            (click)="generateUrl()">
+    <button
+        (click)="generateUrl()">
 
-            Generate
+        Generate Short URL
 
-        </button>
+    </button>
 
     <div
+        class="generated-url"
         *ngIf="generatedUrl">
 
         <h3>
-            Short URL
+            Generated URL
         </h3>
 
         <a
@@ -43,6 +44,7 @@
             target="_blank">
 
             {{ generatedUrl }}
+
         </a>
 
     </div>
@@ -50,5 +52,5 @@
 </div>
 
 <app-url-list
-  #urlList>
+    #urlList>
 </app-url-list>
